@@ -13,8 +13,7 @@
 
 <style>
 #login-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#0B3B1F 0%,#163d1f 60%,#5C7A44 100%);
-  display:none;align-items:center;justify-content:center;z-index:99999;flex-direction:column;gap:0}
-#login-overlay.visible{display:flex}
+  display:flex;align-items:center;justify-content:center;z-index:99999;flex-direction:column;gap:0}
 #login-box{background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.18);border-radius:16px;
   padding:40px 44px;display:flex;flex-direction:column;align-items:center;gap:18px;min-width:320px;
   box-shadow:0 8px 40px rgba(0,0,0,.4)}
@@ -33,31 +32,30 @@
 <script>
 (function(){
   var KEY='briav32_auth';
-  document.addEventListener('DOMContentLoaded',function(){
-    var overlay=document.getElementById('login-overlay');
-    var input=document.getElementById('login-input');
-    var btn=document.getElementById('login-btn');
-    var err=document.getElementById('login-err');
-    if(sessionStorage.getItem(KEY)==='ok'){
-      overlay.style.display='none';
-      return;
-    }
-    overlay.classList.add('visible');
+  function show(){
+    var o=document.getElementById('login-overlay');
+    var i=document.getElementById('login-input');
+    var b=document.getElementById('login-btn');
+    var e=document.getElementById('login-err');
+    if(!o)return;
+    if(sessionStorage.getItem(KEY)==='ok'){o.style.display='none';return;}
+    o.style.display='flex';
     function check(){
-      if(input.value.trim().toUpperCase()==='PLAN2026'){
+      if((i.value||'').trim().toUpperCase()==='PLAN2026'){
         sessionStorage.setItem(KEY,'ok');
-        overlay.classList.remove('visible');
-        overlay.style.display='none';
+        o.style.display='none';
       } else {
-        err.style.display='block';
-        input.value='';
-        input.focus();
+        e.style.display='block';
+        i.value='';
+        i.focus();
       }
     }
-    btn.addEventListener('click',check);
-    input.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
-    input.focus();
-  });
+    b.onclick=check;
+    i.onkeydown=function(ev){if(ev.key==='Enter')check();};
+    i.focus();
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',show);}
+  else{show();}
 })();
 </script>
 <style>
