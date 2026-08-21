@@ -98,6 +98,7 @@ html,body{width:100%;height:100vh;overflow:hidden;background:var(--bg);color:var
 .ms-opt label{display:flex;align-items:center;gap:7px;cursor:pointer}
 .ms-opt input[type=checkbox]{accent-color:var(--b2);width:13px;height:13px;flex-shrink:0}
 .ms-all-row{border-bottom:1px solid var(--bdr);font-weight:700}
+.fb-panel{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
 .fb-r{margin-left:auto;display:flex;align-items:flex-end;gap:8px}
 .xbtn{background:var(--b2);color:#fff;border:none;height:28px;padding:0 14px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600;font-family:var(--f);display:flex;align-items:center;gap:5px;white-space:nowrap}
 .xbtn:hover{background:var(--b1)}
@@ -222,9 +223,9 @@ tbody td{padding:3px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowr
   #xlBtn{font-size:11px;padding:0 8px;height:26px;flex-shrink:0}
 
   /* --- FILTROS: 2 columnas compactas --- */
-  #fb{padding:5px 8px;gap:5px}
-  #fb-co{display:grid !important;grid-template-columns:1fr 1fr !important;gap:5px !important;align-items:end !important;flex-wrap:unset !important;width:100%}
-  .fl{width:auto;min-width:0}
+  #fb{padding:5px 8px}
+  .fb-panel{display:grid;grid-template-columns:1fr 1fr;gap:5px;align-items:end;width:100%}
+  .fl{min-width:0}
   .fl label.lbl{font-size:8px}
   .fl select,.fl input[type=text],.ms-btn{min-width:0;width:100%;font-size:12px;height:30px}
   .fb-r{margin-left:0;width:100%;justify-content:space-between;gap:5px}
@@ -318,7 +319,7 @@ tbody td{padding:3px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowr
   <button class="xbtn" id="xlBtn" style="margin-left:10px;background:#2e7d32" onclick="document.getElementById('xlIn').click()" title="Cargar el Excel AYUDA PRESUPUESTO actualizado para refrescar todo el dashboard sin intervención externa">📤 Actualizar desde Excel</button>
 </div>
 <div id="fb">
-  <div id="fb-co" style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+  <div id="fb-co" class="fb-panel">
     <div class="fl"><label class="lbl">Unidad</label>
       <div class="ms-wrap"><button class="ms-btn" id="ms-btn-UN" onclick="toggleMS(this)"><span id="ms-lbl-UN">TODAS/TODOS</span></button>
         <div class="ms-dd" id="ms-dd-UN"><div class="ms-opt ms-all-row"><label><input type="checkbox" class="ms-all-cb" data-ms="UN" checked onchange="msAll(this)"> TODAS/TODOS</label></div>
@@ -347,7 +348,7 @@ tbody td{padding:3px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowr
     <div class="fl"><label class="lbl">Búsqueda</label>
       <input type="text" id="fSr" placeholder="Contrato, objeto, proveedor..."></div>
   </div>
-  <div id="fb-pr" style="display:none;gap:10px;align-items:flex-end;flex-wrap:wrap">
+  <div id="fb-pr" class="fb-panel" style="display:none">
     <div class="fl"><label class="lbl">Unidad</label>
       <div class="ms-wrap"><button class="ms-btn" id="ms-btn-PUN" onclick="toggleMS(this)"><span id="ms-lbl-PUN">TODAS/TODOS</span></button>
         <div class="ms-dd" id="ms-dd-PUN"><div class="ms-opt ms-all-row"><label><input type="checkbox" class="ms-all-cb" data-ms="PUN" checked onchange="msAll(this)"> TODAS/TODOS</label></div>
@@ -386,7 +387,7 @@ tbody td{padding:3px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowr
     <div class="fl"><label class="lbl">Búsqueda</label>
       <input type="text" id="fSrPr" placeholder="Proceso, bien, dupla..."></div>
   </div>
-  <div id="fb-al" style="display:none;gap:10px;align-items:flex-end;flex-wrap:wrap">
+  <div id="fb-al" class="fb-panel" style="display:none">
     <div class="fl"><label class="lbl">Unidad</label>
       <div class="ms-wrap"><button class="ms-btn" id="ms-btn-AL" onclick="toggleMS(this)"><span id="ms-lbl-AL">TODAS/TODOS</span></button>
         <div class="ms-dd" id="ms-dd-AL"><div class="ms-opt ms-all-row"><label><input type="checkbox" class="ms-all-cb" data-ms="AL" checked onchange="msAll(this)"> TODAS/TODOS</label></div>
@@ -403,7 +404,7 @@ tbody td{padding:3px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowr
     <div class="fl"><label class="lbl">Búsqueda</label>
       <input type="text" id="fSrAl" placeholder="Contrato, objeto, supervisor..."></div>
   </div>
-  <div id="fb-va" style="display:none;gap:10px;align-items:flex-end;flex-wrap:wrap">
+  <div id="fb-va" class="fb-panel" style="display:none">
     <div class="fl"><label class="lbl">Tipo</label>
       <select id="va-tipo" onchange="FILva()">
         <option value="">TODO</option>
@@ -607,10 +608,7 @@ function TAB(t){
   CUR=t;
   ["co","pr","al","va"].forEach(function(x){G("p"+x).classList.toggle("on",x===t);});
   document.querySelectorAll(".nb").forEach(function(b,i){b.classList.toggle("on",["co","pr","al","va"][i]===t);});
-  G("fb-co").style.display=t==="co"?"flex":"none";
-  G("fb-pr").style.display=t==="pr"?"flex":"none";
-  G("fb-al").style.display=t==="al"?"flex":"none";
-  G("fb-va").style.display=t==="va"?"flex":"none";
+  ["fb-co","fb-pr","fb-al","fb-va"].forEach(function(id,i){var show=["co","pr","al","va"][i]===t;G(id).style.display=show?"":"none";});
   if(t==="co")RNDCO();
   else if(t==="pr")RNDPR();
   else if(t==="al")RNDAl();
