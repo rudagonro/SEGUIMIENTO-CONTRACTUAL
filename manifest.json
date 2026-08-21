@@ -1,6 +1,6 @@
 {
-  "name": "Dashboard BRIAV32",
-  "short_name": "BRIAV32",
+  "name": "Contractual",
+  "short_name": "Contractual",
   "description": "Seguimiento Contractual y Precontractual — Brigada de Aviación No. 32",
   "start_url": "/SEGUIMIENTO-CONTRACTUAL/",
   "display": "standalone",
@@ -9,9 +9,9 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='24' fill='%231565c0'/><text x='96' y='130' font-size='100' text-anchor='middle' fill='white'>✈</text></svg>",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
