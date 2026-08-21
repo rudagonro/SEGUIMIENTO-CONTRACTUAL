@@ -207,40 +207,74 @@ tbody td{padding:3px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowr
 #ftr span{font-size:10px;color:var(--t3)}#clk{font-weight:700;color:var(--b2)}
 /* ===================== RESPONSIVE MOBILE ===================== */
 @media(max-width:768px){
-  html,body{height:auto;overflow-y:auto;font-size:14px}
+  html,body{height:auto;overflow-y:auto;font-size:13px}
   #app{height:auto;min-height:100vh;overflow:visible}
-  /* Header */
-  #hdr{height:auto;min-height:50px;padding:8px 10px;flex-wrap:wrap;gap:6px}
-  .logo-img{width:34px;height:34px}
-  .ht{font-size:14px;flex:1}
-  .hnav{margin-left:0;width:100%;overflow-x:auto;padding-bottom:2px;gap:4px;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
-  .nb{padding:5px 11px;font-size:11px;flex-shrink:0}
-  #xlBtn{font-size:11px;padding:0 10px;height:26px}
-  /* Filter bar */
-  #fb{padding:6px 10px;gap:6px;flex-wrap:wrap}
+
+  /* --- HEADER: logo + título en fila, nav en segunda fila --- */
+  #hdr{height:auto;padding:8px 10px;flex-wrap:wrap;gap:4px;min-height:48px}
+  .logo-img{width:32px;height:32px}
+  .ht{font-size:13px;flex:1;white-space:normal;line-height:1.2}
+  .hnav{margin-left:0;width:100%;overflow-x:auto;padding-bottom:2px;
+        gap:4px;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;
+        scrollbar-width:none}
+  .hnav::-webkit-scrollbar{display:none}
+  .nb{padding:5px 10px;font-size:11px;flex-shrink:0;border-radius:14px}
+  #xlBtn{font-size:11px;padding:0 8px;height:26px;flex-shrink:0}
+
+  /* --- FILTROS: 2 columnas compactas --- */
+  #fb{padding:5px 8px;gap:5px;flex-wrap:wrap}
   .fl{width:calc(50% - 3px);min-width:0}
-  .fl select,.fl input[type=text],.ms-btn{min-width:0;width:100%;font-size:13px;height:32px}
-  .fb-r{margin-left:0;width:100%;justify-content:flex-end;gap:6px}
-  #lbl{font-size:11px}
-  /* Panels — allow vertical scroll */
+  .fl label.lbl{font-size:8px}
+  .fl select,.fl input[type=text],.ms-btn{min-width:0;width:100%;font-size:12px;height:30px}
+  .fb-r{margin-left:0;width:100%;justify-content:space-between;gap:5px}
+  #lbl{font-size:10px;text-align:left}
+
+  /* --- PANELS: scroll vertical libre --- */
   #pnls{overflow:visible;flex:none}
-  .pnl{height:auto;overflow:visible;padding:8px 10px;gap:10px}
-  /* KPI: 2 por fila en lugar de 5 */
+  .pnl{height:auto;overflow:visible;padding:6px 8px;gap:8px}
+
+  /* --- KPI: 2 por fila, texto ajustado --- */
   .kr{grid-template-columns:1fr 1fr;gap:6px}
-  .kv{font-size:17px}
-  .kl{font-size:11px}
-  /* Charts: 1 columna */
-  .cg3,.cg4{grid-template-columns:1fr;height:auto;gap:8px}
-  .cb{height:230px}
-  /* Table container: scroll libre */
-  .tfw{flex:none;min-height:0;height:auto}
-  .tw{overflow-x:auto;max-height:60vh;-webkit-overflow-scrolling:touch}
-  /* Alertas grid */
+  .kpi{padding:10px 12px 9px}
+  .kv{font-size:15px;word-break:break-all}
+  .kl{font-size:10px}
+  .ki{font-size:18px;right:8px}
+
+  /* --- GRÁFICOS: 2 columnas en tablet, 1 en móvil pequeño --- */
+  .cg4{grid-template-columns:1fr 1fr;height:auto;gap:6px}
+  .cg3{grid-template-columns:1fr 1fr;height:auto;gap:6px}
+  .cb{height:200px;padding:8px 10px}
+  .ct{font-size:10px}
+
+  /* --- TABLA: scroll horizontal suave, altura limitada --- */
+  .tfw{flex:none;min-height:0;height:auto;margin-top:4px}
+  .tbh{padding:4px 10px}
+  .tbt{font-size:11px}.tbs{font-size:9px}
+  .tw{overflow-x:auto;max-height:55vh;-webkit-overflow-scrolling:touch}
+  table{font-size:10px}
+  thead th{font-size:8px;padding:3px 5px}
+  tbody td{padding:3px 5px;font-size:10px}
+  .pg{padding:3px 8px;flex-wrap:wrap;gap:4px}
+  .pgsize{height:22px;font-size:10px}
+  .pgb{width:22px;height:22px;font-size:10px}
+
+  /* --- ALERTAS: 1 columna --- */
   #agl{grid-template-columns:1fr !important}
-  /* Modal */
-  .modal-box{width:95vw;max-height:90vh;overflow-y:auto;padding:14px}
-  /* Footer */
+  .acard{padding:8px 10px}
+
+  /* --- MODAL --- */
+  .modal-box{width:96vw;max-height:88vh;overflow-y:auto;padding:12px;border-radius:10px}
+
+  /* --- FOOTER: oculto en móvil --- */
   #ftr{display:none}
+}
+
+/* Pantallas muy pequeñas (< 420px): gráficos en 1 columna */
+@media(max-width:420px){
+  .cg3,.cg4{grid-template-columns:1fr}
+  .cb{height:190px}
+  .kv{font-size:13px}
+  .kr{gap:5px}
 }
 /* FUNNEL */
 .fn-row{display:flex;align-items:center;gap:5px;margin-bottom:3px;cursor:pointer;transition:opacity .15s}
