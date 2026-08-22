@@ -380,19 +380,24 @@ tbody td{padding:3px 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowr
     <div class="fl"><label class="lbl">Canal</label>
       <div class="ms-wrap"><button class="ms-btn" id="ms-btn-CN" onclick="toggleMS(this)"><span id="ms-lbl-CN">TODAS/TODOS</span></button>
         <div class="ms-dd" id="ms-dd-CN"><div class="ms-opt ms-all-row"><label><input type="checkbox" class="ms-all-cb" data-ms="CN" checked onchange="msAll(this)"> TODAS/TODOS</label></div>
+<div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="CN" value="ACOFA" checked onchange="msCB(this)"> ACOFA</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="CN" value="CENACAVIACIÓN" checked onchange="msCB(this)"> CENACAVIACIÓN</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="CN" value="CENACEDUCACIÓN" checked onchange="msCB(this)"> CENACEDUCACIÓN</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="CN" value="CENACTELEMÁTICA" checked onchange="msCB(this)"> CENACTELEMÁTICA</label></div>
+<div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="CN" value="DIADQ" checked onchange="msCB(this)"> DIADQ</label></div>
+<div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="CN" value="FMS" checked onchange="msCB(this)"> FMS</label></div>
 </div></div></div>
     <div class="fl"><label class="lbl">Etapa</label>
       <div class="ms-wrap"><button class="ms-btn" id="ms-btn-ET" onclick="toggleMS(this)"><span id="ms-lbl-ET">TODAS/TODOS</span></button>
         <div class="ms-dd" id="ms-dd-ET"><div class="ms-opt ms-all-row"><label><input type="checkbox" class="ms-all-cb" data-ms="ET" checked onchange="msAll(this)"> TODAS/TODOS</label></div>
+<div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="APROBACION LOA" checked onchange="msCB(this)"> APROBACION LOA</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="ASIGNACION DUPLA" checked onchange="msCB(this)"> ASIGNACION DUPLA</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="ENTREGA PLAN" checked onchange="msCB(this)"> ENTREGA PLAN</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="EVALUACION" checked onchange="msCB(this)"> EVALUACION</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="EXPEDICION CDP" checked onchange="msCB(this)"> EXPEDICION CDP</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="EXPLORACION COMERCIAL" checked onchange="msCB(this)"> EXPLORACION COMERCIAL</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="INICIO" checked onchange="msCB(this)"> INICIO</label></div>
+<div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="NEGOCIACIÓN. ACOFA MENOR" checked onchange="msCB(this)"> NEGOCIACIÓN. ACOFA MENOR</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="PONENCIA DE ADJUDICACION" checked onchange="msCB(this)"> PONENCIA DE ADJUDICACION</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="PONENCIA PLIEGOS DEFINITIVOS" checked onchange="msCB(this)"> PONENCIA PLIEGOS DEFINITIVOS</label></div>
 <div class="ms-opt"><label><input type="checkbox" class="ms-item-cb" data-ms="ET" value="PONENCIA PREPLIEGOS" checked onchange="msCB(this)"> PONENCIA PREPLIEGOS</label></div>
@@ -1267,9 +1272,11 @@ function rebuildAllFilters(){
   rebuildMS("ms-dd-UN","UN",uns,false);
   rebuildMS("ms-dd-VAU","VAU",uns,false);
   rebuildMS("ms-dd-ES","ES",uniqVals(CA,"ES"),true);
+  rebuildMS("ms-dd-FI","FI",uniqVals(CA,"FI"),false);
   rebuildMS("ms-dd-PUN","PUN",uniqVals(PA,"UN"),false);
   rebuildMS("ms-dd-CN","CN",uniqVals(PA,"CN"),false);
   rebuildMS("ms-dd-ET","ET",uniqVals(PA,"ET"),false);
+  rebuildMS("ms-dd-PFI","PFI",uniqVals(PA,"FI"),false);
   var years=uniqVals(CA,"AN");
   rebuildYearSelect("fAno",years);
   rebuildYearSelect("va-ano",years);
@@ -1325,7 +1332,7 @@ function handleExcelUpload(file){
 }
 
 /* INIT */
-if(loadFromStorage())rebuildAllFilters();
+loadFromStorage();rebuildAllFilters();
 CF=CA.slice();PF=PA.slice();
 G("lbl").textContent=CF.length+" contratos · "+PF.length+" procesos";
 RNDCO();
